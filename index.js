@@ -53,6 +53,11 @@ app.delete("/foods/:id", function (req, res) {
   // finding an object with id = req.body.id out of the foods
   // remove item from array
   // render deleted object
+  var targetId = parseInt(req.params.id, 10);
+  var targetItem = _.findWhere(foods, {id: targetId});
+  var index = foods.indexOf(targetItem);
+  foods.splice(index, 1);
+  res.send(JSON.stringify(targetItem));
 });
 
 // listen on port 3000

@@ -2,19 +2,13 @@
 var express = require("express");
 var app = express();
 var path = require("path");
-var _ = require("underscore");
 var bodyParser = require("body-parser");
-
 // CONFIG //
-
 // serve js & css files into a public folder
 app.use(express.static(__dirname + '/public'));
-
 // body parser config
 app.use(bodyParser.urlencoded({ extended: true }));
-
 // DATA //
-
 // pre-seeded food data
 var foods = [
   {id: 0, name: "Sushiritto", yumminess: "quite"},
@@ -23,21 +17,20 @@ var foods = [
   {id: 3, name: "Foie Gras", yumminess: "omg"},
   {id: 4, name: "Kale", yumminess: "meh"}
 ];
-
 // ROUTES //
-
+var views = path.join(process.cwd(), "views");
 // root path
-app.get("/", function (req, res) {
+app.get("/", function (req, res){
   // render index.html
+  var homePath = path.join(views, "index.html");
   res.sendFile(path.join(__dirname + '/public/views/index.html'));
 });
-
 // foods index path
 app.get("/foods", function (req, res) {
   // render foods index as JSON
-  res.send(JSON.stringify(foods));
+  // res.send(JSON.stringify(foods));
+  res.send(foods);
 });
-
 app.post("/foods", function (req, res) {
   var newFood = req.body;
   //add a unique id
@@ -47,7 +40,6 @@ app.post("/foods", function (req, res) {
   // send a response with newly created object
   res.send(newFood);
 });
-
 app.delete("/foods/:id", function (req, res) {
   console.log("hitting delete route");
   // finding an object with id = req.body.id out of the foods
@@ -64,6 +56,4 @@ app.delete("/foods/:id", function (req, res) {
 app.listen(3000, function () {
   console.log("listening on port 3000");
 });
-
-
 

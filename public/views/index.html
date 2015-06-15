@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>ToEat.ly</title>
     <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
@@ -11,5 +11,12 @@
     <header>
       <h1>ToEat.ly</h1>
     </header>
+    <form id="food-form">
+      <input name="name" type="text" id="new-food" placeholder="Name of Food">
+      <input name="yumminess" placeholder="Yummy factor">
+      <button type="submit">Add food</button>
+    </form>
+    <ul id="food-list">
+    </ul>
   </body>
 </html>

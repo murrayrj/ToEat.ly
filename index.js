@@ -20,7 +20,7 @@ var foods = [
 // ROUTES //
 var views = path.join(process.cwd(), "views");
 // root path
-app.get("/", function (req, res){
+app.get("/", function (req, res) {
   // render index.html
   var homePath = path.join(views, "index.html");
   res.sendFile(path.join(__dirname + '/public/views/index.html'));
@@ -45,8 +45,14 @@ app.delete("/foods/:id", function (req, res) {
   // finding an object with id = req.body.id out of the foods
   // remove item from array
   // render deleted object
+  var i = 0;
+  var targetItem;
   var targetId = parseInt(req.params.id, 10);
-  var targetItem = _.findWhere(foods, {id: targetId});
+  for (i; i < foods.length; i++) {
+    if (foods[i].id === targetId) {
+      targetItem = foods[i].id;
+    }
+  }
   var index = foods.indexOf(targetItem);
   foods.splice(index, 1);
   res.send(JSON.stringify(targetItem));

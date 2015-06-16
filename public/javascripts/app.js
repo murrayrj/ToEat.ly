@@ -21,5 +21,11 @@ $(function () {
   });
   $('.foodsCon').on("click", ".delete", function () {
     console.log($(this).data('id'));
+    $.ajax({
+      url: '/foods/' + foodId,
+      type: 'DELETE'
+    }).done(function (result) {
+      console.log(result);
+    });
   });
 });

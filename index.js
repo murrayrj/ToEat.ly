@@ -28,8 +28,8 @@ app.get("/", function (req, res) {
 // foods index path
 app.get("/foods", function (req, res) {
   // render foods index as JSON
-  // res.send(JSON.stringify(foods));
-  res.send(foods);
+  res.send(JSON.stringify(foods));
+  // res.send(foods);
 });
 app.post("/foods", function (req, res) {
   var newFood = req.body;
@@ -46,20 +46,19 @@ app.delete("/foods/:id", function (req, res) {
   // remove item from array
   // render deleted object
   var i = 0;
-  var targetItem;
-  var targetId = parseInt(req.params.id, 10);
+  var item;
+  var itemId = req.params.id;
   for (i; i < foods.length; i++) {
-    if (foods[i].id === targetId) {
-      targetItem = foods[i].id;
+    if (foods[i].id === itemId) {
+      item = foods[i].id;
     }
   }
-  var index = foods.indexOf(targetItem);
+  var index = foods.indexOf(item);
   foods.splice(index, 1);
-  res.send(JSON.stringify(targetItem));
+  res.send(JSON.stringify(item));
 });
 
 // listen on port 3000
 app.listen(3000, function () {
   console.log("listening on port 3000");
 });
-
